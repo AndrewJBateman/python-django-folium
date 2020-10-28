@@ -7,6 +7,8 @@ def home(request):
   shp_dir = os.path.join(os.getcwd(), 'media', 'shp')
 
   m = folium.Map(location=[-16.22,-71.59], zoom_start=9)
+
+  ## New location
   # m = folium.Map(location=[48.858370, 2.294481], zoom_start=9)
 
   ## style
@@ -18,11 +20,9 @@ def home(request):
   folium.GeoJson(os.path.join(shp_dir,'rivers.geojson'),name='rivers',style_function=lambda x:style_river).add_to(m)
   folium.LayerControl().add_to(m)
 
-  folium.LayerControl().add_to(m)
-
-  ## export
+  ## export map
   m=m._repr_html_()
   context = {'my_map': m}
 
   ## render
-  return render(request,'geoApp/home.html',context)
+  return render(request,'geoApp/home.html', context)
